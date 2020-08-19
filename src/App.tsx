@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {TodoList} from "./todoList";
+import {TodoList} from "./components/todoList";
 
 function App() {
 
@@ -19,8 +19,8 @@ function App() {
 
     return (
         <div className="App">
-            <TodoList title='Game' tasks={tasks1}/>
-            <TodoList title='Songs' tasks={tasks2}/>
+            <TodoList title='What to learn' tasks={tasks1}/>
+            <TodoList title='Game' tasks={tasks2}/>
         </div>
     );
 }

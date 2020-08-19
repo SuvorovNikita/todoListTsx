@@ -12,17 +12,17 @@ type TaskType = {
 }
 
 export function TodoList(props: PropsType) {
-    let {title} = props;
+    let {title, tasks} = props;
     return <div>
         <h3>{title}</h3>
         <div>
             <input/>
-            <button>+</button>
+            <button>Add</button>
         </div>
         <ul>
-            <li><input type="checkbox" checked={props.tasks[0].isDone}/><span>{props.tasks[0].title}</span></li>
-            <li><input type="checkbox" checked={props.tasks[1].isDone}/><span>{props.tasks[1].title}</span></li>
-            <li><input type="checkbox" checked={props.tasks[2].isDone}/><span>{props.tasks[2].title}</span></li>
+            <li><input type="checkbox" checked={tasks[0].isDone}/><span>{tasks[0].title}</span></li>
+            <li><input type="checkbox" checked={tasks[1].isDone}/><span>{tasks[1].title}</span></li>
+            <li><input type="checkbox" checked={tasks[2].isDone}/><span>{tasks[2].title}</span></li>
         </ul>
         <div>
             <button>All</button>

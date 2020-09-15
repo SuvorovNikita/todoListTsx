@@ -1,16 +1,15 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValueType, TaskType} from "../App";
 
-
 type PropsType = {
     id: string
     title: string
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    addTask: (title: string) => void
-    changeFilter: (value: FilterValueType, todoListID: string) => void
     filter: FilterValueType
-    changeStatus: (id: string, isDone: boolean) => void
+    removeTask: (taskID: string, todoListID: string) => void
+    addTask: (title: string, todoListID: string) => void
+    changeFilter: (value: FilterValueType, todoListID: string) => void
+    changeStatus: (taskID: string, isDone: boolean, todoListID: string) => void
 }
 
 export function TodoList(props: PropsType) {
@@ -20,7 +19,7 @@ export function TodoList(props: PropsType) {
 
     const addTask = () => {
         if (title.trim()) {
-            props.addTask(title.trim())
+            props.addTask(title.trim(), props.id)
             setTitle('')
         } else {
             setError('Введите задачу')
@@ -40,9 +39,9 @@ export function TodoList(props: PropsType) {
 
     const onAllClickHandler = () => props.changeFilter("all", props.id)
 
-    const onActiveClickHandler = () => props.changeFilter('active',props.id)
+    const onActiveClickHandler = () => props.changeFilter('active', props.id)
 
-    const onCompletedClickHandler = () => props.changeFilter('completed',props.id)
+    const onCompletedClickHandler = () => props.changeFilter('completed', props.id)
 
     return <div>
         <h3>{props.title}</h3>
@@ -59,8 +58,8 @@ export function TodoList(props: PropsType) {
             {
                 props.tasks.map(t => {
 
-                    const removeTask = () => props.removeTask(t.id);
-                    const changeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeStatus(t.id, e.currentTarget.checked)
+                    const removeTask = () => props.removeTask(t.id, props.id);
+                    const changeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeStatus(t.id, e.currentTarget.checked, props.id)
 
                     return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
 

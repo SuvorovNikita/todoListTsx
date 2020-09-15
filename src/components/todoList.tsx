@@ -3,12 +3,13 @@ import {FilterValueType, TaskType} from "../App";
 
 
 type PropsType = {
+    id: string
     title: string
     tasks: Array<TaskType>
     removeTask: (id: string) => void
     addTask: (title: string) => void
     changeFilter: (value: FilterValueType) => void
-    filter:  FilterValueType
+    filter: FilterValueType
     changeStatus: (id: string, isDone: boolean) => void
 }
 
@@ -61,7 +62,7 @@ export function TodoList(props: PropsType) {
                     const removeTask = () => props.removeTask(t.id);
                     const changeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeStatus(t.id, e.currentTarget.checked)
 
-                    return <li key={t.id}  className={t.isDone ? 'is-done':''}>
+                    return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
 
                         <input type="checkbox"
                                checked={t.isDone}
@@ -76,9 +77,12 @@ export function TodoList(props: PropsType) {
 
         </ul>
         <div>
-            <button className={props.filter === 'all' ? 'active-filter': ''} onClick={onAllClickHandler}>All</button>
-            <button className={props.filter === 'active' ? 'active-filter': ''} onClick={onActiveClickHandler}>Active</button>
-            <button className={props.filter === 'completed' ? 'active-filter': ''} onClick={onCompletedClickHandler}>Completed</button>
+            <button className={props.filter === 'all' ? 'active-filter' : ''} onClick={onAllClickHandler}>All</button>
+            <button className={props.filter === 'active' ? 'active-filter' : ''} onClick={onActiveClickHandler}>Active
+            </button>
+            <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                    onClick={onCompletedClickHandler}>Completed
+            </button>
         </div>
     </div>
 

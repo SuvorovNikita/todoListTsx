@@ -35,20 +35,19 @@ function App() {
     ])
 
     const [tasks, setTask] = useState<TasksStateType>({
-            [todoListID1]: [
-                {id: v1(), title: 'HTML', isDone: true},
-                {id: v1(), title: 'JS', isDone: false},
-                {id: v1(), title: 'TypeScript', isDone: true},
-                {id: v1(), title: 'React', isDone: false}
-            ],
-            [todoListID2]: [
-                {id: v1(), title: 'Book', isDone: true},
-                {id: v1(), title: 'Disk', isDone: false},
-                {id: v1(), title: 'Tea', isDone: true},
-                {id: v1(), title: 'Coffee', isDone: false}
-            ]
-        }
-    )
+        [todoListID1]: [
+            {id: v1(), title: 'HTML', isDone: true},
+            {id: v1(), title: 'JS', isDone: false},
+            {id: v1(), title: 'TypeScript', isDone: true},
+            {id: v1(), title: 'React', isDone: false}
+        ],
+        [todoListID2]: [
+            {id: v1(), title: 'Book', isDone: true},
+            {id: v1(), title: 'Disk', isDone: false},
+            {id: v1(), title: 'Tea', isDone: true},
+            {id: v1(), title: 'Coffee', isDone: false}
+        ]
+    })
 
     function removeTask(taskID: string, todoListID: string) {
         let todoListTasks = tasks[todoListID]
@@ -94,6 +93,15 @@ function App() {
         setTask({...tasks, [newTodoListID]: []})
     }
 
+    function changeTaskTitle(taskID: string, title: string, todoListID: string) {
+        const todoListTasks = tasks[todoListID]
+        const task = todoListTasks.find(t => t.id === taskID)
+        if (task) {
+            task.title = title
+            setTask({...tasks})
+        }
+    }
+
     return (
         <div className="App">
             <AddItemForm addItem={addTodoList}/>
@@ -122,6 +130,7 @@ function App() {
                                 addTask={addTask}
                                 changeStatus={changeStatus}
                                 removeTodoList={removeTodoList}
+                                changeTaskTitle={changeTaskTitle}
                             />
                         )
                     }

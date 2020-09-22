@@ -4,6 +4,7 @@ import {TodoList} from "./components/todoList";
 
 import './App.css';
 import {v1} from 'uuid';
+import AddItemForm from "./components/AddItemForm";
 
 export type TaskType = {
     id: string
@@ -84,8 +85,18 @@ function App() {
         delete tasks[todolistID]
     }
 
+    function addTodoList(title: string) {
+        const newTodoListID = v1()
+        const newTodoList: TodoListType = {
+            id: newTodoListID, title: title, filter: "all"
+        }
+        setTodoList([...todoLists, newTodoList])
+        setTask({...tasks, [newTodoListID]: []})
+    }
+
     return (
         <div className="App">
+            <AddItemForm addItem={addTodoList}/>
             {
                 todoLists.map(tl => {
 

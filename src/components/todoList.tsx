@@ -14,6 +14,7 @@ type PropsType = {
     changeStatus: (taskID: string, isDone: boolean, todoListID: string) => void
     removeTodoList: (todolistID: string) => void
     changeTaskTitle: (taskID: string, title: string, todoListID: string) => void
+    changeTodoListTitle: (title: string, todoListID: string) => void
 }
 
 export function TodoList(props: PropsType) {
@@ -21,6 +22,11 @@ export function TodoList(props: PropsType) {
     const addTask = (title: string) => {
         props.addTask(title, props.id)
     }
+
+    const changeTodoListTitle = (title: string) => {
+        props.changeTodoListTitle(title,props.id,)
+    }
+
 
     const onAllClickHandler = () => props.changeFilter("all", props.id)
 
@@ -31,7 +37,8 @@ export function TodoList(props: PropsType) {
     const removeTodoList = () => props.removeTodoList(props.id)
 
     return <div>
-        <h3>{props.title}
+        <h3>
+            <EditAbleSpan value={props.title} changeValue={changeTodoListTitle}/>
             <button onClick={removeTodoList}>Delete</button>
         </h3>
         <AddItemForm addItem={addTask}/>
@@ -41,7 +48,9 @@ export function TodoList(props: PropsType) {
 
                     const removeTask = () => props.removeTask(t.id, props.id);
                     const changeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeStatus(t.id, e.currentTarget.checked, props.id)
-                    const changeTaskTitle = (value:string)=> {props.changeTaskTitle(t.id,value,props.id)}
+                    const changeTaskTitle = (value: string) => {
+                        props.changeTaskTitle(t.id, value, props.id)
+                    }
 
                     return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
 
